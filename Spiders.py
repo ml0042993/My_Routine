@@ -1,6 +1,7 @@
 import time
 import requests
 from bs4 import BeautifulSoup
+import setting
 class Get_Time():
 	'''
 	获取系统时间
@@ -14,15 +15,13 @@ class Get_Request():
 	def __init__(self):
 		self.URL_POOL = []#符合条件的链接地址集合,通过列表内的地址进入各个页面,再爬取具体内容,链接池
 
-		self.SITE_URL = 'https://www.98asde.info/'#主网址地址,用来和爬取的后半部分链接地址拼接为一个可用地址
+		self.SITE_URL = setting.SITE_URL#主网址地址,用来和爬取的后半部分链接地址拼接为一个可用地址
 
-		self.Japanese_Url = "https://www.98asde.info/forum-103-1.html"
+		self.Japanese_Url = setting.Japanese_Url
 		self.Europe_Url = ''
 		self.China_Url = ''
 
-		self.headers = {
-			'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36'
-		}
+		self.headers = setting.HEADERS
 	def get_Html(self,page ="https://www.98asde.info/forum-103-1.html"):
 		'''
 		获取网页内容
