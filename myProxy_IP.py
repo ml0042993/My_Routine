@@ -6,10 +6,10 @@ class Proxy_IP():
 	def __init__(self):
 		self.headers = setting.HEADERS
 		self.URL_PROXY = []
-		self.set_page()
-		self.run()
+
+
 	def set_page(self,page=1):
-		self.Proxy_Site_Url = setting.Proxy_Site_Url+str(page)# 代理网站地址
+		self.Proxy_Site_Url = setting.Proxy_Site_Url_ONE+str(page)# 代理网站地址
 		
 
 	def get_Requsets(self):
@@ -41,7 +41,9 @@ class Proxy_IP():
 			URL_ADDRESS = '{}://{}:{}'.format(Html_Type[i].text(), IP_address[i].text(), Port_address[i].text())
 			self.URL_PROXY.append(URL_ADDRESS)
 
-	def run(self):
+	def run(self,page):
+		self.URL_PROXY = []
+		self.set_page(page)
 		self.get_Requsets()
 		self.get_IP_Port()
 if __name__ == '__main__':

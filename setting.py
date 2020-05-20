@@ -3,7 +3,10 @@ SITE_URL = 'https://www.98asde.info/'#
 Japanese_Url = "https://www.98asde.info/forum-103-1.html"
 Europe_Url = ''
 China_Url = ''
-Proxy_Site_Url = "https://www.xicidaili.com/nn/"  # 代理网站地址
+Proxy_Site_Url_ONE = "https://www.xicidaili.com/nn/"  # 代理网站地址
+# Proxy_Site_Url_ONE = "https://www.xicidaili.com/nt/"  # 代理网站地址
+Proxy_Site_Url_TOW = "https://ip.jiangxianli.com/?page=1&anonymity=2"  # 代理网站地址
+
 
 #请求头
 HEADERS = {

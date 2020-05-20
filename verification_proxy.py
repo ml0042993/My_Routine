@@ -9,23 +9,28 @@ class Verification(Proxy_IP):
 		self.SAVE_PROXY = []
 
 	async def verif_URL(self,proxy):
-		conn = aiohttp.TCPConnector(verify_ssl=False)
+		conn = aiohttp.TCPConnector(ssl=False)
 		async with aiohttp.ClientSession(connector=conn) as session:
 			try:
-				async with session.get('https://www.baidu.com',proxy=proxy,timeout=15) as response:
+				start_time = time.time()
+				async with session.get(setting.SITE_URL,proxy=proxy,timeout=15) as response:
 					if response.status in setting.STATUS_CODES:
+						end_time = time.time()
 						self.SAVE_PROXY.append(proxy)
+						print(end_time-start_time)
+
 					else:
 						print("Error")
 			except Exception as e:
-				print("error")
+				# print("error")
+				pass
 
 	def main_Run(self):
 		try:
 			loop = asyncio.get_event_loop()
 			for i in range(0,len(self.URL_PROXY),100):
 				test_proxy = self.URL_PROXY[i:i+100]
-				print(test_proxy)
+				# print(test_proxy)
 				tasks = [self.verif_URL(proxy) for proxy in test_proxy]
 				loop.run_until_complete(asyncio.wait(tasks))
 				time.sleep(5)
@@ -36,13 +41,22 @@ class Verification(Proxy_IP):
 		flag = True
 		page = 1
 		while flag:
-			self.set_page(page)
-			self.main_Run()
+			self.run(page)
 			print(self.Proxy_Site_Url)
-			if len(self.SAVE_PROXY) > 5:
+			for i in range(3):
+				self.main_Run()
+				# print(self.SAVE_PROXY)
+				print("完成一次匹配")
+			if len(self.SAVE_PROXY) > 5 or page>5:
 				break
 			page+=1
-obj = Verification()
-obj.judge()
+	def write_File(self):
+		with open('proxy_file','w+') as fs:
+			for result in self.SAVE_PROXY:
+				fs.write(result+'\n')
+if __name__ == '__main__':
 
-print(obj.SAVE_PROXY)
+	obj = Verification()
+	obj.judge()
+	obj.write_File()
+
