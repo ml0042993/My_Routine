@@ -28,8 +28,8 @@ class Verification(Proxy_IP):
 	def main_Run(self):
 		try:
 			loop = asyncio.get_event_loop()
-			for i in range(0,len(self.URL_PROXY),100):
-				test_proxy = self.URL_PROXY[i:i+100]
+			for i in range(0,len(self.URL_PROXY),15):
+				test_proxy = self.URL_PROXY[i:i+15]
 				# print(test_proxy)
 				tasks = [self.verif_URL(proxy) for proxy in test_proxy]
 				loop.run_until_complete(asyncio.wait(tasks))
@@ -43,10 +43,10 @@ class Verification(Proxy_IP):
 		while flag:
 			self.run(page)
 			print(self.Proxy_Site_Url)
-			for i in range(3):
-				self.main_Run()
+
+			self.main_Run()
 				# print(self.SAVE_PROXY)
-				print("完成一次匹配")
+			print("完成一次匹配")
 			if len(self.SAVE_PROXY) > 5 or page>5:
 				break
 			page+=1
