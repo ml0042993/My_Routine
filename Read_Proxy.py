@@ -1,6 +1,6 @@
 import linecache
 import random
-import json
+
 def random_proxy():
 	'''
 	随机获取一个可用代理
