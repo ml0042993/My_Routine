@@ -13,7 +13,7 @@ class Verification(Proxy_IP):
 		async with aiohttp.ClientSession(connector=conn) as session:
 			try:
 				start_time = time.time()
-				async with session.get(setting.SITE_URL,proxy=proxy,timeout=15) as response:
+				async with session.get(setting.SITE_URL,proxy=proxy,timeout=5) as response:
 					if response.status in setting.STATUS_CODES:
 						end_time = time.time()
 						self.SAVE_PROXY.append(proxy)
@@ -47,16 +47,20 @@ class Verification(Proxy_IP):
 			self.main_Run()
 				# print(self.SAVE_PROXY)
 			print("完成一次匹配")
-			if len(self.SAVE_PROXY) > 5 or page>5:
+			if len(self.SAVE_PROXY) > 3 or page>1:
 				break
 			page+=1
 	def write_File(self):
 		with open('proxy_file','w+') as fs:
 			for result in self.SAVE_PROXY:
 				fs.write(result+'\n')
+	@property
+	def Proxy_Total(self):
+
+		return len(self.SAVE_PROXY)
 if __name__ == '__main__':
 
 	obj = Verification()
 	obj.judge()
 	obj.write_File()
-
+	print(obj.Proxy_Total)

@@ -27,7 +27,7 @@ class Get_Request:
 		proxy = random_proxy()
 		# print(proxy)
 		try:
-			respones = requests.get(self.page,headers = self.headers,proxies=proxy,timeout=10)
+			respones = requests.get(self.page,headers = self.headers,proxies=proxy,timeout=20)
 			if respones:
 				print("Connect Successful")
 				self.respones = respones

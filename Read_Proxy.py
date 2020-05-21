@@ -1,13 +1,14 @@
 import linecache
 import random
-
 def random_proxy():
 	'''
 	随机获取一个可用代理
 	:return: 
 	'''
 	proxy_dic={}
-	ran = random.randrange(1,5)
+	count = len(open(r'proxy_file','r').readlines())
+
+	ran = random.randrange(1,count)
 
 	proxy = linecache.getline(r'proxy_file',ran).replace('\n','')
 
