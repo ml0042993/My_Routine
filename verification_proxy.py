@@ -47,7 +47,7 @@ class Verification(Proxy_IP):
 			self.main_Run()
 				# print(self.SAVE_PROXY)
 			print("完成一次匹配")
-			if len(self.SAVE_PROXY) > 3 or page>1:
+			if len(self.SAVE_PROXY) > 10 or page>9:
 				break
 			page+=1
 	def write_File(self):
