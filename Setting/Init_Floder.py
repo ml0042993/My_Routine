@@ -74,5 +74,5 @@ class Floder_Create:
 		调用create_Proxy_floder()使其成为类属性,方便调用
 		:return:
 		'''
-		return cls().creat_File_floder()
+		return cls().create_Proxy_floder()
 
