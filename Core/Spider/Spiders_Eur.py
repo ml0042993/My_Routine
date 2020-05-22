@@ -1,11 +1,12 @@
-from Spiders import Get_Request,Get_Time
-from bs4 import BeautifulSoup
 import time
-import setting
-class Get_Chi(Get_Request):
+from Core.Request_Site import Get_Request
+from Core.Get_Time import Get_Time
+from bs4 import BeautifulSoup
+from Setting import Config
+class Get_Eur(Get_Request):
 	def __init__(self):
 		super().__init__()
-		self.page = setting.China_Url
+		self.page = Config.Europe_Url
 		self.get_Html()
 	def get_Url_Base(self):
 		if self.respones != None:
@@ -37,6 +38,6 @@ class Get_Chi(Get_Request):
 				print(image_address)
 
 if __name__ == '__main__':
-	obj = Get_Chi()
+	obj = Get_Eur()
 	obj.get_Url_Base()
 	obj.core_Result()

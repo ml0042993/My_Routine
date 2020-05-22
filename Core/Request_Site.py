@@ -1,22 +1,13 @@
-import time
 import requests
-import setting
-from Read_Proxy import random_proxy
-class Get_Time():
-	'''
-	获取系统时间
-	'''
-	@staticmethod
-	def TODAY_DATA():
-		return time.strftime('%Y/%m/%d',time.localtime(time.time()))
-
+from Setting import Config
+from Core.Read_Proxy import random_proxy
 # print(Get_Time.TODAY_DATA())
 class Get_Request:
 	def __init__(self):
 		self.URL_POOL = []#符合条件的链接地址集合,通过列表内的地址进入各个页面,再爬取具体内容,链接池
-		self.SITE_URL = setting.SITE_URL#主网址地址,用来和爬取的后半部分链接地址拼接为一个可用地址
+		self.SITE_URL = Config.SITE_URL#主网址地址,用来和爬取的后半部分链接地址拼接为一个可用地址
 		self.page = None
-		self.headers = setting.HEADERS
+		self.headers = Config.HEADERS
 	def get_Html(self):
 		'''
 		获取网页内容

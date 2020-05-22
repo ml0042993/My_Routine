@@ -1,18 +1,18 @@
 import requests
 from pyquery import PyQuery as pq
-import setting
+from Setting import Config
 
 class Proxy_IP():
 	def __init__(self):
-		self.headers = setting.HEADERS
+		self.headers = Config.HEADERS
 		self.URL_PROXY = []
 
 
 	def set_page(self,page=1):
-		self.Proxy_Site_Url = setting.Proxy_Site_Url_ONE+str(page)# 代理网站地址
+		self.Proxy_Site_Url = Config.Proxy_Site_Url_ONE+str(page)# 代理网站地址
 
 	def set_page_other(self,page=1):
-		self.Proxy_Site_Url = setting.Proxy_Site_Url_TOW.format(page=page)
+		self.Proxy_Site_Url = Config.Proxy_Site_Url_TOW.format(page=page)
 	def get_Requsets(self):
 		self.respones = requests.get(self.Proxy_Site_Url, headers=self.headers)
 		if self.respones == None:

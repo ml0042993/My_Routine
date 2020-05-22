@@ -1,7 +1,7 @@
-import setting
 import time
 import aiohttp,asyncio
-from myProxy_IP import Proxy_IP
+from Setting import Config
+from Core.Proxy.myProxy_IP import Proxy_IP
 
 class Verification(Proxy_IP):
 	def __init__(self):
@@ -13,8 +13,8 @@ class Verification(Proxy_IP):
 		async with aiohttp.ClientSession(connector=conn) as session:
 			try:
 				start_time = time.time()
-				async with session.get(setting.SITE_URL,proxy=proxy,timeout=5) as response:
-					if response.status in setting.STATUS_CODES:
+				async with session.get(Config.SITE_URL,proxy=proxy,timeout=5) as response:
+					if response.status in Config.STATUS_CODES:
 						end_time = time.time()
 						self.SAVE_PROXY.append(proxy)
 						print(end_time-start_time)
