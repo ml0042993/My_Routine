@@ -1,7 +1,9 @@
 import time
+import os
 import aiohttp,asyncio
 from Setting import Config
 from Core.Proxy.myProxy_IP import Proxy_IP
+from Setting.Init_Floder import Floder_Create
 
 class Verification(Proxy_IP):
 	def __init__(self):
@@ -47,16 +49,18 @@ class Verification(Proxy_IP):
 			self.main_Run()
 				# print(self.SAVE_PROXY)
 			print("完成一次匹配")
-			if len(self.SAVE_PROXY) > 10 or page>9:
+			if len(self.SAVE_PROXY) > 3 or page>9:
 				break
 			page+=1
 	def write_File(self):
-		with open('proxy_file','w+') as fs:
+		filePath = Floder_Create().Proxy_path#建立proxy文件的路径
+		if os.path.exists(filePath):#如果不存在
+			Floder_Create.create_Proxyfloder()#创建该文件夹
+		with open(filePath+'\proxy_file','w+') as fs:#打开proxy_file文件存放代理地址
 			for result in self.SAVE_PROXY:
 				fs.write(result+'\n')
 	@property
 	def Proxy_Total(self):
-
 		return len(self.SAVE_PROXY)
 if __name__ == '__main__':
 
