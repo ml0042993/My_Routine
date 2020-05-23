@@ -55,7 +55,7 @@ class Verification(Proxy_IP):
 	def write_File(self):
 		filePath = Floder_Create().Proxy_path#建立proxy文件的路径
 		print(os.path.exists(filePath))
-		if os.path.exists(filePath)==False:#如果不存在
+		if Floder_Create().proxy_exist==False:#如果不存在
 			Floder_Create.create_Proxyfloder()#创建该文件夹
 		with open(filePath+'\proxy_file','w+') as fs:#打开proxy_file文件存放代理地址
 			for result in self.SAVE_PROXY:

@@ -37,7 +37,9 @@ class Floder_Create:
 	@property
 	def File_path(self):
 		return self.file_Path
-
+	@property
+	def proxy_exist(self):#判断proxy文件是否存在
+		return os.path.exists(self.proxy_Path)
 	def creat_File_floder(self):
 		'''
 		生成文件存放的文件夹位置
