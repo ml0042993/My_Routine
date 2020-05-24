@@ -1,8 +1,11 @@
 import time
+import json
 from Core.Request_Site import Get_Request
 from Core.Get_Time import Get_Time
 from bs4 import BeautifulSoup
 from Setting import Config
+from Setting.Init_Floder import Floder_Create
+from Core.Get_File import Get_File
 class Get_Jap(Get_Request):
 	def __init__(self):
 		super().__init__()
@@ -31,16 +34,31 @@ class Get_Jap(Get_Request):
 		self.get_Html()
 		if self.respones != None:
 			soup = BeautifulSoup(self.respones.text, 'lxml')
-			title_message = soup.select('#thread_subject')[0].get_text()#获得标题
-			print(title_message)
-			magnet_message = soup.select('.blockcode li')[0].get_text()
-			print(magnet_message)
-			image_address = soup.select('.zoom')[0].attrs['file']#获取的第一个[0]图片的链接
-			print(image_address)
+			self.title_message = soup.select('#thread_subject')[0].get_text()#获得标题
+			print(self.title_message)
+			self.magnet_message = soup.select('.blockcode li')[0].get_text()
+			print(self.magnet_message)
+			self.image_address = soup.select('.zoom')[0].attrs['file']#获取的第一个[0]图片的链接
+			print(self.image_address)
 	def get_Import_result(self):
-		for url in self.URL_POOL:
-			self.get_core_Result(url)
+		file_path = Floder_Create().File_path + '\Japanese'
+		with open(file_path+'\File','w',encoding='utf-8') as f:
+			for i in range(len(self.URL_POOL)):
+				file_result = {}
+				self.get_core_Result(self.URL_POOL[i])
+				imagesave_path = Floder_Create().jap_image_path+"\%03d"%(i+1)
 
+				Get_File.run_Image(self.image_address,imagesave_path)
+				file_result['title'] = self.title_message
+				file_result['magnet'] = self.magnet_message
+				file_result['image'] = imagesave_path
+				file_result = json.dumps(file_result)
+				print(file_result)
+				f.write(file_result+'\n')
+
+	def run_japsite(self):
+		self.get_Url_Base()
+		self.get_Import_result()
 if __name__ == '__main__':
 	obj = Get_Jap()
 	obj.get_Url_Base()

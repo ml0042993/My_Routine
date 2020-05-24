@@ -27,6 +27,9 @@ class Ui_MainWindow(object):
         self.horizontalLayout_2.setContentsMargins(11, 11, 11, 11)
         self.horizontalLayout_2.setSpacing(6)
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
+        self.refresh_Button = QtWidgets.QPushButton(self.groupBox_2)
+        self.refresh_Button.setObjectName("refresh_Button")
+        self.horizontalLayout_2.addWidget(self.refresh_Button)
         self.Init_Button = QtWidgets.QPushButton(self.groupBox_2)
         self.Init_Button.setObjectName("Init_Button")
         self.horizontalLayout_2.addWidget(self.Init_Button)
@@ -127,6 +130,7 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        self.refresh_Button.setText(_translate("MainWindow", "代理刷新"))
         self.Init_Button.setText(_translate("MainWindow", "初始化"))
         self.Japanese_Button.setText(_translate("MainWindow", "Japanese"))
         self.Europe_Button.setText(_translate("MainWindow", "Europe"))

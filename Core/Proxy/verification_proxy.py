@@ -19,6 +19,7 @@ class Verification(Proxy_IP):
 					if response.status in Config.STATUS_CODES:
 						end_time = time.time()
 						self.SAVE_PROXY.append(proxy)
+
 						print(end_time-start_time)
 
 					else:
@@ -58,14 +59,20 @@ class Verification(Proxy_IP):
 		if Floder_Create().proxy_exist==False:#如果不存在
 			Floder_Create.create_Proxyfloder()#创建该文件夹
 		with open(filePath+'\proxy_file','w+') as fs:#打开proxy_file文件存放代理地址
+			print(self.SAVE_PROXY)
 			for result in self.SAVE_PROXY:
+				print(result)
 				fs.write(result+'\n')
 	@property
 	def Proxy_Total(self):
 		return len(self.SAVE_PROXY)
+
+	def run_proxy(self):
+
+		self.judge()
+		self.write_File()
+		return True
 if __name__ == '__main__':
 
 	obj = Verification()
-	obj.judge()
-	obj.write_File()
-	print(obj.Proxy_Total)
+	obj.run_proxy()

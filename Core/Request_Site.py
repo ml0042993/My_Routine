@@ -7,9 +7,11 @@ class Get_Request:
 	def __init__(self):
 		self.URL_POOL = []#符合条件的链接地址集合,通过列表内的地址进入各个页面,再爬取具体内容,链接池
 		self.SITE_URL = Config.SITE_URL#主网址地址,用来和爬取的后半部分链接地址拼接为一个可用地址
+		self.creat_floder()
 		self.page = None
 		self.headers = Config.HEADERS
 		self.get_Proxy()
+
 	def get_Html(self):
 		'''
 		获取网页内容
@@ -31,6 +33,26 @@ class Get_Request:
 			self.get_Proxy()#更换代理
 			self.get_Html()#重新获取response
 			print(e)
+	def get_image(self):
+		'''
+		获取网页内容
+		:param page:要爬取网页的内容
+		:return:
+		'''
+		print(self.proxy)
+		try:
+			respones = requests.get(self.page,headers = self.headers,timeout=20)
+			if respones:
+				print("Connect Successful")
+				self.respones = respones
+			else:
+				print('Connect Fail')
+				print('Try connecting again')
+				self.respones=None
+		except ConnectionError as e:#当网络没有响应时
+			self.respones = None
+			self.get_Html()#重新获取response
+			print(e)
 	def get_Proxy(self):
 		if Floder_Create().proxy_exist:
 			self.proxy=None
@@ -48,6 +70,11 @@ class Get_Request:
 		获取相关链接内的标题,磁力链接,图片地址
 		:return:
 		'''
+		pass
+	def creat_floder(self):
+		Floder_Create.create_Filefloder()
+
+	def save_Image(self):
 		pass
 
 '''
