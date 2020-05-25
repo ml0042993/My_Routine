@@ -6,6 +6,7 @@ China_Url = 'https://www.98asde.info/forum-2-1.html'
 Proxy_Site_Url_ONE = "https://www.xicidaili.com/nn/"  # 代理网站地址
 # Proxy_Site_Url_ONE = "https://www.xicidaili.com/nt/"  # 代理网站地址
 Proxy_Site_Url_TOW = "https://ip.jiangxianli.com/?page={page}&anonymity=2"  # 代理网站地址
+Proxy_Site_Url_THREE = 'https://ip.ihuan.me/anonymity/2.html?page=b97827cc'
 
 
 #请求头
