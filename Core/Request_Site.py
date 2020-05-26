@@ -2,7 +2,7 @@ import requests
 from Setting import Config
 from Core.Read_Proxy import random_proxy
 from Setting.Init_Floder import Floder_Create
-from requests.exceptions import ConnectionError, ReadTimeout
+from requests.exceptions import ConnectionError
 class Get_Request:
 	def __init__(self):
 		self.URL_POOL = []#符合条件的链接地址集合,通过列表内的地址进入各个页面,再爬取具体内容,链接池
