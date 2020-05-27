@@ -2,7 +2,7 @@ import requests
 from Setting import Config
 from Core.Read_Proxy import random_proxy
 from Setting.Init_Floder import Floder_Create
-from requests.exceptions import ConnectionError
+from requests.exceptions import ConnectionError,ReadTimeout
 class Get_Request:
 	def __init__(self):
 		self.URL_POOL = []#符合条件的链接地址集合,通过列表内的地址进入各个页面,再爬取具体内容,链接池
@@ -20,7 +20,7 @@ class Get_Request:
 		'''
 		print(self.proxy)
 		try:
-			respones = requests.get(self.page,headers = self.headers,proxies=self.proxy,timeout=20)
+			respones = requests.get(self.page,headers = self.headers,proxies=self.proxy,timeout=10)
 			if respones:
 				print("Connect Successful")
 				self.respones = respones
@@ -29,6 +29,11 @@ class Get_Request:
 				print('Try connecting again')
 				self.respones=None
 		except ConnectionError as e:#当网络没有响应时
+			self.respones = None
+			self.get_Proxy()#更换代理
+			self.get_Html()#重新获取response
+			print(e)
+		except ReadTimeout as e:#当网络没有响应时
 			self.respones = None
 			self.get_Proxy()#更换代理
 			self.get_Html()#重新获取response

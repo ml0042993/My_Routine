@@ -9,6 +9,7 @@ class Floder_Create:
 		self.get_Jap_imagefloder()
 		self.get_Eur_imagefloder()
 		self.get_Chi_imagefloder()
+		self.get_original_patp()
 	def get_Parent_path(self):
 		'''
 		获取根目录地址
@@ -16,6 +17,12 @@ class Floder_Create:
 		'''
 		path = os.path.dirname(__file__)#获取当前目录
 		self.parent_path = os.path.dirname(path)#获取上级目录
+	def get_original_patp(self):
+		'''
+		创建代理匹配池,存放未测试的代理
+		:return:
+		'''
+		self.original_Path = self.parent_path + '\File\Proxy\Original'
 	def get_Proxy_path(self):
 		'''
 		创建代理文件夹路径
@@ -42,6 +49,9 @@ class Floder_Create:
 	@property
 	def Proxy_path(self):
 		return self.proxy_Path
+	@property
+	def Original_path(self):
+		return self.original_Path
 	@property
 	def File_path(self):
 		return self.file_Path
