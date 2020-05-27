@@ -38,6 +38,27 @@ class Get_Request:
 			self.get_Proxy()#更换代理
 			self.get_Html()#重新获取response
 			print(e)
+	def get_noproxy_Html(self):
+		try:
+			respones = requests.get(self.page,proxies=self.proxy,timeout=10)
+			if respones:
+				print("Connect Successful")
+				self.respones = respones
+			else:
+				print('Connect Fail')
+				print('Try connecting again')
+				self.respones=None
+		except ConnectionError as e:#当网络没有响应时
+			self.respones = None
+			# self.get_Proxy()#更换代理
+			self.get_Html()#重新获取response
+			print(e)
+		except ReadTimeout as e:#当网络没有响应时
+			self.respones = None
+			# self.get_Proxy()#更换代理
+			self.get_Html()#重新获取response
+			print(e)
+
 	def get_image(self):
 		'''
 		获取网页内容
